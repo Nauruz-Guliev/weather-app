@@ -10,11 +10,13 @@ import java.net.MalformedURLException;
 import java.util.Scanner;
 
 public class WeatherApp extends Application {
+    // just colors
     public static final String ANSI_LIGHT_BLUE = "\u001B[36m";
     private static final String ANSI_RESET = "\u001b[0m";
     private static final String ANSI_RED = "\u001B[31m";
     public static final String ANSI_PURPLE = "\u001B[35m";
     public static final String ANSI_YELLOW = "\u001B[33m";
+    //just colors 
     private Scanner sc;
     private WeatherURLS urls;
     private String API_KEY;
@@ -40,7 +42,7 @@ public class WeatherApp extends Application {
                 String city = checkInputIfExit(sc.nextLine());
                 urls.setUrlCities(city); //adding city name to url
                 cityInfoParser.parse(UrlResponse.getHttpResponse(urls.getUrlCities())); // getting json response from server
-                if (cityInfoParser.getCities().length == 0) { // if no city found than throw exception
+                if (cityInfoParser.getCities().length == 0) { // if no city found then throw exception
                     throw new IllegalArgumentException("Such a city does not exist.");
                 } else {
                     cities = cityInfoParser.getCities();
@@ -64,7 +66,7 @@ public class WeatherApp extends Application {
             }
         }
     }
-
+    //used to give the user choice
     private void initAppropriateParsers(String userChoice) {
         if (userChoice.equals("R")) {
             cityInfoParser = new RegexCitiesInfoParser();
@@ -74,7 +76,7 @@ public class WeatherApp extends Application {
             forecastInfoParser = new GSONForecastInfoParser();
         }
     }
-
+    //used to give an opportunity to exit
     private String checkInputIfExit(String input) {
         if (input.equals("exit")) {
             System.exit(0);
